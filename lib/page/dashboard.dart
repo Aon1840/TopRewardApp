@@ -25,9 +25,14 @@ class _DashboardState extends State<Dashboard> {
           padding: const EdgeInsets.all(8),
           itemCount: entries.length,
           itemBuilder: (context, index) {
-            return Mission(
-              title: entries[index],
-              color: colorCodes[index],
+            return GestureDetector(
+              child: Mission(
+                title: entries[index],
+                color: colorCodes[index],
+              ),
+              onTap: () => {
+                debugPrint("Hello test ${entries[index]}")
+              }
             );
           },
         ),
