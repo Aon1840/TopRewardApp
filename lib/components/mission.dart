@@ -17,23 +17,23 @@ class Mission extends StatelessWidget {
         margin: const EdgeInsets.all(8),
         height: 100,
         child: Row(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Expanded(
               flex: 3,
               child: Container(
                   height: 80,
-                  width: 1,
+                  width: 80,
                   margin: const EdgeInsets.only(left: 10),
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.black54)),
             ),
             Expanded(
-              flex: 8,
+              flex: 9,
                 child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 10),
