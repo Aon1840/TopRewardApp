@@ -59,65 +59,33 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.only(top: 70, right: 50, left: 50),
-                child: Image.asset(
-                  'assets/images/tops_super_market_logo.png',
-                )),
-            const Padding(
-                padding: EdgeInsets.only(top: 40),
-                child: Text(
-                  'Log in Now',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                )),
-            const Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Text(
-                  'Please login to continue using our app',
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
-                )),
-            const Padding(
-                padding: EdgeInsets.only(top: 30, right: 50, left: 50),
-                child: TextField(
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: Colors.grey)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2, color: Colors.black)),
-                      hintText: 'Email'),
-                )),
-            const Padding(
-                padding: EdgeInsets.only(top: 10, right: 50, left: 50),
-                child: TextField(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Center(
+              child: Column(
+            children: <Widget>[
+              Padding(
+                  padding: const EdgeInsets.only(top: 70, right: 50, left: 50),
+                  child: Image.asset(
+                    'assets/images/tops_super_market_logo.png',
+                  )),
+              const Padding(
+                  padding: EdgeInsets.only(top: 40),
+                  child: Text(
+                    'Log in Now',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  )),
+              const Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    'Please login to continue using our app',
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  )),
+              const Padding(
+                  padding: EdgeInsets.only(top: 30, right: 50, left: 50),
+                  child: TextField(
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -126,9 +94,80 @@ class _MyHomePageState extends State<MyHomePage> {
                         focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(width: 2, color: Colors.black)),
-                        hintText: 'Password'))),
-          ],
-        ),
+                        hintText: 'Email'),
+                  )),
+              const Padding(
+                  padding: EdgeInsets.only(top: 10, right: 50, left: 50),
+                  child: TextField(
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 1, color: Colors.grey)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black)),
+                          hintText: 'Password'))),
+            ],
+          )),
+          Padding(
+            padding: const EdgeInsets.only(right: 50),
+            child: TextButton(
+              child: const Text(
+                'Forgot Password?',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10,
+                    color: Colors.grey),
+              ),
+              onPressed: () {},
+            ),
+          ),
+          Center(
+              child: Padding(
+                  padding: const EdgeInsets.only(right: 50, left: 50),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.pinkAccent,
+                          minimumSize: const Size.fromHeight(40),
+                        ),
+                        child: const Text("Log in"),
+                        onPressed: () {},
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.indigoAccent,
+                          minimumSize: const Size.fromHeight(40),
+                        ),
+                        child: const Text("Log in Facebook"),
+                        onPressed: () {},
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          minimumSize: const Size.fromHeight(40),
+                        ),
+                        child: const Text(
+                          "Log in Google",
+                          style: TextStyle(
+                              color: Colors.grey),
+                        ),
+                        onPressed: () {},
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          minimumSize: const Size.fromHeight(40),
+                        ),
+                        child: const Text("Log in Apple"),
+                        onPressed: () {},
+                      ),
+                    ],
+                  )))
+        ],
       ),
     );
   }
