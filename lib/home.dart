@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:top_reward/page/chat.dart';
 import 'package:top_reward/page/dashboard.dart';
 import 'package:top_reward/page/profile.dart';
+import 'package:top_reward/page/scan.dart';
 import 'package:top_reward/page/setting.dart';
 
 class Home extends StatefulWidget {
@@ -13,6 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentTab = 0;
+
   // final List<Widget> screens = [
   //   const Dashboard(),
   //   const Chat(),
@@ -32,14 +34,24 @@ class _HomeState extends State<Home> {
         child: currentScreen,
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {},
+        backgroundColor: Colors.white,
+        child: Icon(
+          Icons.qr_code,
+          color: currentTab == 2 ? Colors.red : Colors.grey,
+        ),
+        onPressed: () {
+          setState(() {
+            currentScreen = const Scan();
+            currentTab = 2;
+          });
+        },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 10,
-        child: Container(
+        child: SizedBox(
           height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,11 +72,13 @@ class _HomeState extends State<Home> {
                       children: [
                         Icon(
                           Icons.dashboard,
-                          color: currentTab == 0 ? Colors.blue : Colors.grey,
+                          color: currentTab == 0 ? Colors.red : Colors.grey,
                         ),
                         Text(
                           'Dashboard',
-                          style: TextStyle(color: currentTab == 0 ? Colors.blue : Colors.grey,),
+                          style: TextStyle(
+                            color: currentTab == 0 ? Colors.red : Colors.grey,
+                          ),
                         )
                       ],
                     ),
@@ -82,11 +96,13 @@ class _HomeState extends State<Home> {
                       children: [
                         Icon(
                           Icons.chat,
-                          color: currentTab == 1 ? Colors.blue : Colors.grey,
+                          color: currentTab == 1 ? Colors.red : Colors.grey,
                         ),
                         Text(
                           'Chat',
-                          style: TextStyle(color: currentTab == 1 ? Colors.blue : Colors.grey,),
+                          style: TextStyle(
+                            color: currentTab == 1 ? Colors.red : Colors.grey,
+                          ),
                         )
                       ],
                     ),
@@ -102,7 +118,7 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       setState(() {
                         currentScreen = const Profile();
-                        currentTab = 2;
+                        currentTab = 3;
                       });
                     },
                     child: Column(
@@ -110,11 +126,13 @@ class _HomeState extends State<Home> {
                       children: [
                         Icon(
                           Icons.person,
-                          color: currentTab == 2 ? Colors.blue : Colors.grey,
+                          color: currentTab == 3 ? Colors.red : Colors.grey,
                         ),
                         Text(
                           'Profile',
-                          style: TextStyle(color: currentTab == 2 ? Colors.blue : Colors.grey,),
+                          style: TextStyle(
+                            color: currentTab == 3 ? Colors.red : Colors.grey,
+                          ),
                         )
                       ],
                     ),
@@ -124,7 +142,7 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       setState(() {
                         currentScreen = const Setting();
-                        currentTab = 3;
+                        currentTab = 4;
                       });
                     },
                     child: Column(
@@ -132,11 +150,13 @@ class _HomeState extends State<Home> {
                       children: [
                         Icon(
                           Icons.settings,
-                          color: currentTab == 3 ? Colors.blue : Colors.grey,
+                          color: currentTab == 4 ? Colors.red : Colors.grey,
                         ),
                         Text(
                           'Setting',
-                          style: TextStyle(color: currentTab == 3 ? Colors.blue : Colors.grey,),
+                          style: TextStyle(
+                            color: currentTab == 4 ? Colors.red : Colors.grey,
+                          ),
                         )
                       ],
                     ),
