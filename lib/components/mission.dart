@@ -17,28 +17,36 @@ class Mission extends StatelessWidget {
         margin: const EdgeInsets.all(8),
         height: 100,
         child: Row(
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Container(
-                height: 80,
-                width: 80,
-                margin: const EdgeInsets.only(left: 10),
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Colors.black54)),
-            Column(
+            Expanded(
+              flex: 3,
+              child: Container(
+                  height: 80,
+                  width: 1,
+                  margin: const EdgeInsets.only(left: 10),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: Colors.black54)),
+            ),
+            Expanded(
+              flex: 8,
+                child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 10),
                   child: Text('Entry $title'),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(left: 10, top: 10),
+                  padding: EdgeInsets.only(left: 10, top: 10,right: 10),
                   child: IntervalProgressBar(
                       direction: IntervalProgressDirection.horizontal,
                       max: 3,
                       progress: 1,
                       intervalSize: 3,
-                      size: Size(200, 10),
+                      size: Size(double.maxFinite, 10),
                       highlightColor: Colors.black,
                       defaultColor: Colors.grey,
                       intervalColor: Colors.pink,
@@ -50,7 +58,7 @@ class Mission extends StatelessWidget {
                   child: Text('Entry $title'),
                 ),
               ],
-            )
+            ))
           ],
         ));
     // child: Center(child: Text('Entry $title')));
