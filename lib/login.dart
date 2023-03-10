@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -135,7 +136,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           minimumSize: const Size.fromHeight(40),
                         ),
                         child: const Text("Log in"),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()));
+                        },
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -152,8 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         child: const Text(
                           "Log in Google",
-                          style: TextStyle(
-                              color: Colors.grey),
+                          style: TextStyle(color: Colors.grey),
                         ),
                         onPressed: () {},
                       ),
