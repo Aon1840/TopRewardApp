@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -60,7 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+        body: SingleChildScrollView(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Center(
@@ -135,7 +137,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           minimumSize: const Size.fromHeight(40),
                         ),
                         child: const Text("Log in"),
-                        onPressed: () {},
+                        onPressed: () {
+                          debugPrint('Login');
+                        },
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -143,7 +147,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           minimumSize: const Size.fromHeight(40),
                         ),
                         child: const Text("Log in Facebook"),
-                        onPressed: () {},
+                        onPressed: () {
+                          debugPrint('Login Facebook');
+                        },
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -152,10 +158,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         child: const Text(
                           "Log in Google",
-                          style: TextStyle(
-                              color: Colors.grey),
+                          style: TextStyle(color: Colors.grey),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          debugPrint('Login Google');
+                        },
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -163,12 +170,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           minimumSize: const Size.fromHeight(40),
                         ),
                         child: const Text("Log in Apple"),
-                        onPressed: () {},
+                        onPressed: () {
+                          debugPrint('Login Apple');
+                        },
                       ),
                     ],
                   )))
         ],
       ),
-    );
+    ));
   }
 }
