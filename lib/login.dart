@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 import 'package:flutter/foundation.dart';
 
 class Login extends StatelessWidget {
@@ -139,6 +140,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: const Text("Log in"),
                         onPressed: () {
                           debugPrint('Login');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()));
                         },
                       ),
                       ElevatedButton(
