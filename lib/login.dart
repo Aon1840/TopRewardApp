@@ -196,20 +196,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           icon: const Icon(Icons.apple),
                           label: const Text("Log in Apple")),
-                      const Center(
-                        child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: IntervalProgressBar(
-                                direction: IntervalProgressDirection.horizontal,
-                                max: 3,
-                                progress: 1,
-                                intervalSize: 3,
-                                size: Size(double.infinity, 10),
-                                highlightColor: Colors.black,
-                                defaultColor: Colors.grey,
-                                intervalColor: Colors.pink,
-                                intervalHighlightColor: Colors.transparent,
-                                radius: 5))
+                      const SizedBox(
+                        width: double.maxFinite,
+                        height: 20,
                       )
                     ],
                   )))
