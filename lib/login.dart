@@ -146,39 +146,55 @@ class _MyHomePageState extends State<MyHomePage> {
                                   builder: (context) => const Home()));
                         },
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.indigoAccent,
-                          minimumSize: const Size.fromHeight(40),
-                        ),
-                        child: const Text("Log in Facebook"),
-                        onPressed: () {
-                          debugPrint('Login Facebook');
-                        },
-                      ),
-                      ElevatedButton(
+                      ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.indigoAccent,
+                            minimumSize: const Size.fromHeight(40),
+                          ),
+                          onPressed: () {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              duration: Duration(milliseconds: 1),
+                              content: Text("Login Facebook"),
+                            ));
+                          },
+                          icon: const Icon(Icons.facebook),
+                          label: const Text("Log in Facebook")),
+                      ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           minimumSize: const Size.fromHeight(40),
                         ),
-                        child: const Text(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            duration: Duration(milliseconds: 1),
+                            content: Text("Log in google"),
+                          ));
+                        },
+                        icon: const Icon(
+                          Icons.mail,
+                          color: Colors.grey,
+                        ),
+                        label: const Text(
                           "Log in Google",
                           style: TextStyle(color: Colors.grey),
                         ),
-                        onPressed: () {
-                          debugPrint('Login Google');
-                        },
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          minimumSize: const Size.fromHeight(40),
-                        ),
-                        child: const Text("Log in Apple"),
-                        onPressed: () {
-                          debugPrint('Login Apple');
-                        },
-                      ),
+                      ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            minimumSize: const Size.fromHeight(40),
+                          ),
+                          onPressed: () {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              duration: Duration(milliseconds: 1),
+                              content: Text("Log in Apple"),
+                            ));
+                          },
+                          icon: const Icon(Icons.apple),
+                          label: const Text("Log in Apple"))
                     ],
                   )))
         ],
