@@ -106,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Padding(
                 padding: EdgeInsets.only(top: 30, right: 50, left: 50),
                 child: TextField(
+                  cursorColor: Colors.black,
                   decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(width: 1, color: Colors.grey)),
@@ -117,6 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Padding(
                 padding: EdgeInsets.only(top: 10, right: 50, left: 50),
                 child: TextField(
+                    cursorColor: Colors.black,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide:
