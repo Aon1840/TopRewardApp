@@ -26,6 +26,7 @@ class Mission extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.black54)),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 10),
@@ -35,9 +36,9 @@ class Mission extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10, top: 10),
                   child: IntervalProgressBar(
                       direction: IntervalProgressDirection.horizontal,
-                      max: 3,
-                      progress: 1,
-                      intervalSize: 3,
+                      max: 4,
+                      progress: 2,
+                      intervalSize: 2,
                       size: Size(200, 10),
                       highlightColor: Colors.black,
                       defaultColor: Colors.grey,
@@ -45,6 +46,7 @@ class Mission extends StatelessWidget {
                       intervalHighlightColor: Colors.transparent,
                       radius: 5),
                 ),
+                const SizedBox(height: 10,),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 10),
                   child: Text('Entry $title'),
