@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
 
-void main() {
-  runApp(const Login());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Login extends StatelessWidget {
+  const Login({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Demo Login page',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -25,7 +20,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page login'),
     );
   }
 }
@@ -71,11 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -94,23 +84,50 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Padding(
+                padding: const EdgeInsets.only(top: 70, right: 50, left: 50),
+                child: Image.asset(
+                  'assets/images/tops_super_market_logo.png',
+                )),
+            const Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: Text(
+                  'Log in Now',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                )),
+            const Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  'Please login to continue using our app',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                )),
+            const Padding(
+                padding: EdgeInsets.only(top: 30, right: 50, left: 50),
+                child: TextField(
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 1, color: Colors.grey)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.black)),
+                      hintText: 'Email'),
+                )),
+            const Padding(
+                padding: EdgeInsets.only(top: 10, right: 50, left: 50),
+                child: TextField(
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Colors.grey)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 2, color: Colors.black)),
+                        hintText: 'Password'))),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
