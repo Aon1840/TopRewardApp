@@ -173,9 +173,7 @@ class HorizontalProgressPainter extends IntervalProgressPainter {
   @override
   void paintBlockInterval(Canvas canvas, int blockIndex, Size blockSize) {
     final blockWidth = blockSize.width;
-    final highlight = highlightBlock(blockIndex);
     final dx = (blockWidth) * blockIndex;
-    painter.color = highlight ? highlightColor : defaultColor;
     canvas.save();
     canvas.translate(dx, 0);
     if (shouldDrawInterval(blockIndex)) {
