@@ -1,12 +1,7 @@
-library intervalprogressbar;
-
 import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
-import 'package:intervalprogressbar/CircleProgressPainter.dart';
 
 class IntervalProgressBar extends StatelessWidget {
-  final IntervalProgressDirection direction;
   final int max;
   final int progress;
   final int intervalSize;
@@ -22,7 +17,6 @@ class IntervalProgressBar extends StatelessWidget {
 
   const IntervalProgressBar(
       {Key? key,
-      this.direction = IntervalProgressDirection.horizontal,
       required this.max,
       required this.progress,
       required this.intervalSize,
@@ -42,51 +36,19 @@ class IntervalProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CustomPainter painter;
-    switch (direction) {
-      case IntervalProgressDirection.horizontal:
-        painter = HorizontalProgressPainter(
-            max,
-            progress,
-            intervalSize,
-            highlightColor,
-            defaultColor,
-            intervalColor,
-            intervalHighlightColor,
-            radius,
-            reverse);
-        break;
-      case IntervalProgressDirection.vertical:
-        painter = VerticalProgressPainter(
-            max,
-            progress,
-            intervalSize,
-            highlightColor,
-            defaultColor,
-            intervalColor,
-            intervalHighlightColor,
-            radius,
-            reverse);
-        break;
-      case IntervalProgressDirection.circle:
-        painter = CircleProgressPainter(
-            max,
-            progress,
-            intervalSize,
-            highlightColor,
-            defaultColor,
-            intervalColor,
-            intervalHighlightColor,
-            radius,
-            reverse,
-            intervalDegrees,
-            strokeWith);
-        break;
-    }
+    painter = HorizontalProgressPainter(
+        max,
+        progress,
+        intervalSize,
+        highlightColor,
+        defaultColor,
+        intervalColor,
+        intervalHighlightColor,
+        radius,
+        reverse);
     return CustomPaint(painter: painter, size: size);
   }
 }
-
-enum IntervalProgressDirection { vertical, horizontal, circle }
 
 abstract class IntervalProgressPainter extends CustomPainter {
   final int max;
@@ -120,20 +82,24 @@ abstract class IntervalProgressPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (progress > this.max) {
+    if (progress > max) {
       throw Exception("progress must <= max");
     }
     bound = Offset.zero & size;
     Size blockSize = calBlockSize();
-    for (int i = 0; i < this.max; i++) {
+    for (int i = 0; i < max; i++) {
       paintBlock(canvas, i, blockSize);
+    }
+
+    for (int i = 0; i < max; i++) {
+      paintBlockInterval(canvas, i, blockSize);
     }
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     final old = oldDelegate as IntervalProgressPainter;
-    return old.max != this.max ||
+    return old.max != max ||
         old.progress != progress ||
         old.intervalSize != intervalSize ||
         old.intervalColor != intervalColor ||
@@ -145,21 +111,23 @@ abstract class IntervalProgressPainter extends CustomPainter {
   }
 
   bool highlightBlock(int index) =>
-      reverse ? index >= (this.max - progress) : index < progress;
+      reverse ? index >= (max - progress) : index < progress;
 
   bool highlightInterval(int index) =>
-      reverse ? index >= (this.max - progress - 1) : index < progress - 1;
+      reverse ? index >= (max - progress - 1) : index < progress - 1;
 
   void paintBlock(Canvas canvas, int blockIndex, Size blockSize);
+
+  void paintBlockInterval(Canvas canvas, int blockIndex, Size blockSize);
 
   Size calBlockSize();
 
   bool shouldDrawStartRadius(int index) => index == 0 && radius > 0;
 
-  bool shouldDrawEndRadius(int index) => index == this.max - 1 && radius > 0;
+  bool shouldDrawEndRadius(int index) => index == max - 1 && radius > 0;
 
   bool shouldDrawInterval(int index) =>
-      index != this.max - 1 &&
+      index != max &&
       (intervalColor != IntervalProgressBar.TRANSPARENT ||
           intervalHighlightColor != IntervalProgressBar.TRANSPARENT);
 }
@@ -179,15 +147,14 @@ class HorizontalProgressPainter extends IntervalProgressPainter {
             intervalColor, intervalHighlightColor, radius, reverse, 0.0);
 
   @override
-  Size calBlockSize() => Size(
-      ((bound.width - intervalSize * (this.max - 1)) / this.max), bound.height);
+  Size calBlockSize() =>
+      Size(((bound.width - intervalSize * (max - 1)) / max), bound.height);
 
   @override
   void paintBlock(Canvas canvas, int i, Size blockSize) {
     final blockWidth = blockSize.width;
     final highlight = highlightBlock(i);
-    final dx = (blockWidth + intervalSize) * i;
-
+    final dx = (blockWidth) * i;
     Rect rect = Rect.fromLTRB(0, 0, blockWidth, bound.height);
     painter.color = highlight ? highlightColor : defaultColor;
     canvas.save();
@@ -199,20 +166,24 @@ class HorizontalProgressPainter extends IntervalProgressPainter {
     if (shouldDrawEndRadius(i)) {
       rect = _drawRightRound(canvas, rect);
     }
-
     canvas.drawRect(rect, painter);
+    canvas.restore();
+  }
 
-    if (shouldDrawInterval(i)) {
-      painter.color =
-          highlightInterval(i) ? intervalHighlightColor : intervalColor;
-      canvas.drawRect(
-          Rect.fromLTRB(
-            blockWidth,
-            0,
-            blockWidth + intervalSize,
-            bound.height,
-          ),
-          painter);
+  @override
+  void paintBlockInterval(Canvas canvas, int blockIndex, Size blockSize) {
+    final blockWidth = blockSize.width;
+    final highlight = highlightBlock(blockIndex);
+    final dx = (blockWidth) * blockIndex;
+    painter.color = highlight ? highlightColor : defaultColor;
+    canvas.save();
+    canvas.translate(dx, 0);
+    if (shouldDrawInterval(blockIndex)) {
+      painter.color = highlightInterval(blockIndex)
+          ? intervalHighlightColor
+          : intervalColor;
+      canvas.drawCircle(Offset(blockWidth.toDouble(), bound.height / 2),
+          intervalSize.toDouble(), painter);
     }
     canvas.restore();
   }
@@ -238,75 +209,6 @@ class HorizontalProgressPainter extends IntervalProgressPainter {
     canvas.save();
     canvas.clipRect(clipRect, clipOp: ClipOp.difference);
     canvas.drawPath(path, painter);
-    canvas.restore();
-  }
-}
-
-class VerticalProgressPainter extends IntervalProgressPainter {
-  VerticalProgressPainter(
-      int max,
-      int progress,
-      int intervalSize,
-      Color highlightColor,
-      Color defaultColor,
-      Color intervalColor,
-      Color intervalHighlightColor,
-      double radius,
-      bool reverse)
-      : super(max, progress, intervalSize, highlightColor, defaultColor,
-            intervalColor, intervalHighlightColor, radius, reverse, 0.0);
-
-  @override
-  void paintBlock(Canvas canvas, int i, Size blockSize) {
-    final blockHeight = blockSize.height;
-    final dy = (blockHeight + intervalSize) * i;
-    Rect rect = Rect.fromLTRB(0, 0, bound.width, blockHeight);
-
-    canvas.save();
-    canvas.translate(0, dy);
-    painter.color = highlightBlock(i) ? highlightColor : defaultColor;
-    if (shouldDrawStartRadius(i)) {
-      rect = _drawStartRadius(canvas, rect);
-    }
-    if (shouldDrawEndRadius(i)) {
-      rect = _drawEndRadius(canvas, rect);
-    }
-    canvas.drawRect(rect, painter);
-    if (shouldDrawInterval(i)) {
-      painter.color =
-          highlightInterval(i) ? intervalHighlightColor : intervalColor;
-      final intervalRect = Rect.fromLTRB(
-          0, blockHeight, bound.width, blockHeight + intervalSize);
-      canvas.drawRect(intervalRect, painter);
-    }
-    canvas.restore();
-  }
-
-  @override
-  Size calBlockSize() =>
-      Size(bound.width, (bound.height - intervalSize * (max - 1)) / max);
-
-  Rect _drawStartRadius(Canvas canvas, Rect rect) {
-    final clipRect =
-        Rect.fromLTRB(rect.left, rect.top + radius, rect.right, rect.bottom);
-    _drawRadius(canvas, rect, clipRect);
-    return clipRect;
-  }
-
-  Rect _drawEndRadius(Canvas canvas, Rect rect) {
-    final clipRect =
-        Rect.fromLTRB(rect.left, rect.top, rect.right, rect.bottom - radius);
-    _drawRadius(canvas, rect, clipRect);
-    return clipRect;
-  }
-
-  void _drawRadius(Canvas canvas, Rect rect, Rect clipRect) {
-    final rRect = RRect.fromLTRBR(
-        rect.left, rect.top, rect.right, rect.bottom, Radius.circular(radius));
-    final p = Path()..addRRect(rRect);
-    canvas.save();
-    canvas.clipRect(clipRect, clipOp: ClipOp.difference);
-    canvas.drawPath(p, painter);
     canvas.restore();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../customprogressMission/intervalprogressbar.dart';
+import 'dart:math';
 
 class Mission extends StatelessWidget {
   const Mission({Key? key, required this.title, required this.color})
@@ -9,12 +10,14 @@ class Mission extends StatelessWidget {
   final String title;
   final int color;
 
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
-            color: Colors.amber[color]),
+            color: Colors.grey[color]),
         margin: const EdgeInsets.all(8),
         height: 100,
         child: Row(
@@ -40,19 +43,18 @@ class Mission extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10, top: 10),
                   child: Text('Entry $title'),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 10, top: 10,right: 10),
                   child: IntervalProgressBar(
-                      direction: IntervalProgressDirection.horizontal,
                       max: 3,
-                      progress: 1,
-                      intervalSize: 3,
-                      size: Size(double.maxFinite, 10),
+                      progress: Random().nextInt(3),
+                      intervalSize: 6,
+                      size: Size(double.maxFinite, 8),
                       highlightColor: Colors.black,
                       defaultColor: Colors.grey,
-                      intervalColor: Colors.pink,
+                      intervalColor: Colors.black,
                       intervalHighlightColor: Colors.transparent,
-                      radius: 5),
+                      radius: 5,),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 10),

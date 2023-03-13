@@ -14,7 +14,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     debugPrint('Dashboard run');
     final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F'];
-    final List<int> colorCodes = <int>[600, 500, 400, 300, 200, 100];
+    final List<int> colorCodes = <int>[700, 600, 400, 300, 200, 100];
 
     return Scaffold(
       appBar: AppBar(
