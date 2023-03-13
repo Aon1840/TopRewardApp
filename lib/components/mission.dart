@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intervalprogressbar/intervalprogressbar.dart';
+
+import '../customprogressMission/intervalprogressbar.dart';
 
 class Mission extends StatelessWidget {
   const Mission({Key? key, required this.title, required this.color})
