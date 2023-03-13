@@ -179,9 +179,7 @@ class HorizontalProgressPainter extends IntervalProgressPainter {
     canvas.save();
     canvas.translate(dx, 0);
     if (shouldDrawInterval(blockIndex)) {
-      painter.color = highlightInterval(blockIndex)
-          ? intervalHighlightColor
-          : intervalColor;
+      painter.color = intervalColor;
       canvas.drawCircle(Offset(blockWidth.toDouble(), bound.height / 2),
           intervalSize.toDouble(), painter);
     }

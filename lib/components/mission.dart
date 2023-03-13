@@ -44,17 +44,17 @@ class Mission extends StatelessWidget {
                   child: Text('Entry $title'),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10, top: 10,right: 10),
+                  padding: const EdgeInsets.only(left: 10, top: 10,right: 10),
                   child: IntervalProgressBar(
                       max: 3,
                       progress: Random().nextInt(3),
                       intervalSize: 6,
-                      size: Size(double.maxFinite, 8),
+                      size: const Size(double.maxFinite, 8),
                       highlightColor: Colors.black,
                       defaultColor: Colors.grey,
                       intervalColor: Colors.black,
                       intervalHighlightColor: Colors.transparent,
-                      radius: 5,),
+                      radius: 5),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 10),
